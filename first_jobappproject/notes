@@ -1,0 +1,3 @@
+starting the mysql service:
+
+docker run -d --name mysql_container -e MYSQL_USER=root -e MYSQL_PASSWORD=root PGDATA=/data/mysql -v mysql:/data/mysql -p 3306:3306 --network mysql --restart unless-stopped mysql

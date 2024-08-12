@@ -1,0 +1,55 @@
+services:
+  mysql:
+    container_name: mysql_container
+    image: mysql
+    environment:
+#      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      PGDATA: /data/mysql
+    volumes:
+      - mysql:/data/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - mysql
+    restart: unless-stopped
+
+
+#  pgadmin:
+#    container_name: pgadmin_container
+#    image: dpage/pgadmin4
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+#      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+#      PGADMIN_CONFIG_SERVER_MODE: 'False'
+#    volumes:
+#      - pgadmin:/var/lib/pgadmin
+#    ports:
+#      - "5050:80"
+#    networks:
+#      - mysql
+#    restart: unless-stopped
+#
+#
+
+  phpmyadmin:
+    container_name: phpmyadmin_container
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: mysql  # The hostname of the MySQL service
+      PMA_PORT: 3306
+      PMA_USER: root  # Default MySQL user
+      PMA_PASSWORD: root  # Default MySQL user password
+    ports:
+      - "8080:80"  # Expose phpMyAdmin on port 8080
+    networks:
+      - mysql
+    restart: unless-stopped
+networks:
+  mysql:
+    driver: bridge
+
+
+volumes:
+  mysql:
+  pgadmin:

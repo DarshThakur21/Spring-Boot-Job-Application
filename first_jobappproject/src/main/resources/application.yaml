@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: first_jobappproject
+
+  datasource:
+    url: jdbc:mysql://mysql_container:3306/jobapp
+    username: root
+    password: 2106@2308ud
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+server:
+  port: 8081
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+
+info:
+  app:
+    name: jobApplication
+    description: this is the full spring project
+    version: 1.0.1
